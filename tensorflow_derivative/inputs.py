@@ -1,5 +1,6 @@
 import tensorflow as tf
 
+
 class Inputs(object):
     def __init__(self, names, datatype=tf.float32, variable_scope="inputs"):
         self._names = names
@@ -10,7 +11,8 @@ class Inputs(object):
         self._placeholders_dict = {}
         with tf.variable_scope(variable_scope):
             for name in names:
-                placeholder = tf.placeholder(dtype=self._datatype, shape=(None,), name=name)
+                placeholder = tf.placeholder(
+                    dtype=self._datatype, shape=(None, ), name=name)
                 self._placeholders_list.append(placeholder)
                 self.placeholders_dict[name] = placeholder
 
