@@ -19,29 +19,32 @@ def main():
     """
     Set up input vector for neural network
     """
-    inputs_names = ['x', 'y']
-    inputs = Inputs(inputs_names)
-    placeholders = inputs.placeholders
+    inputs = Inputs(['x', 'y'])
     """
     Add a simple neural network on top of the inputs and create the outputs structure
     """
-    net = neural_network(placeholders)
-
-    outputs_names = ['a', 'b']
-    outputs = Outputs(net, outputs_names)
+    net = neural_network(inputs.placeholders)
+    outputs = Outputs(net, ['a', 'b'])
     """
     Make derivative of neural network output respective to the inputs
     """
     derivatives = Derivatives(inputs, outputs)
+    #da_dx = derivatives.get('a', ['x'])
+    da_dxdy = derivatives.get('a', ['x', 'y'])
+    raise Exception(da_dxdy)
     """
-    Calculate network output and first derivatives for given input
+    Calculate network output, first derivatives and second derivatives for given input
     """
     example = np.zeros((1, 2), dtype=np.float32)
     example[0, :] = [1.0, 2.0]
     with tf.Session() as sess:
         sess.run(tf.global_variables_initializer())
-        response = sess.run([net], feed_dict={placeholders: example})
-        print("Response: {}".format(response))
+        r, r_da_dx, r_da_dxy = sess.run(
+            [net, da_dx, da_dxdy], feed_dict={inputs.placeholders: example})
+
+    print("Response: {}".format(r))
+    print("Response: {}".format(r_da_dx))
+    print("Response: {}".format(r_da_dxdy))
 
 
 if __name__ == "__main__":
