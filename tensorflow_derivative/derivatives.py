@@ -15,10 +15,8 @@ class Derivatives(object):
                 raise Exception('Input {} is not in list {}.'.format(
                     name, self._inputs.names))
 
-        print('debug: inputs', inputs)
         derivative = self._outputs.outputs_dict[output]
         for name in inputs:
-            print('debug: derivative', derivative)
             derivative = tf.gradients(derivative,
                                       self._inputs.placeholders_dict[name])
 

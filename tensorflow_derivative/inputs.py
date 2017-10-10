@@ -16,7 +16,7 @@ class Inputs(object):
                 self._placeholders_list.append(placeholder)
                 self.placeholders_dict[name] = placeholder
 
-        self._placeholders = tf.stack(self._placeholders_list, axis=1)
+            self._placeholders = tf.stack(self._placeholders_list, axis=1)
 
     @property
     def names(self):
