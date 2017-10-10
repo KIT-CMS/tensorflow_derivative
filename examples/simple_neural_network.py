@@ -31,6 +31,7 @@ def main():
     # Calculate network output, first derivatives and second derivatives for given input
     example = np.zeros((1, 2), dtype=np.float32)
     example[0, :] = [0.0, 0.0]
+
     with tf.Session() as sess:
         sess.run(tf.global_variables_initializer())
         r, r_da_dx, r_da_dxdy = sess.run(
