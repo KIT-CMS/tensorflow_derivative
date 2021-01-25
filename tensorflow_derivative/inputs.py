@@ -1,5 +1,6 @@
 import tensorflow as tf
 
+tf.compat.v1.disable_eager_execution()
 
 class Inputs(object):
     def __init__(self, names, datatype=tf.float32, variable_scope="inputs"):
@@ -9,9 +10,9 @@ class Inputs(object):
 
         self._placeholders_list = []
         self._placeholders_dict = {}
-        with tf.variable_scope(variable_scope):
+        with tf.compat.v1.variable_scope(variable_scope):
             for name in names:
-                placeholder = tf.placeholder(
+                placeholder = tf.compat.v1.placeholder(
                     dtype=self._datatype, shape=(None, ), name=name)
                 self._placeholders_list.append(placeholder)
                 self.placeholders_dict[name] = placeholder

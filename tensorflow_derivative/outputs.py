@@ -10,7 +10,7 @@ class Outputs(object):
             raise Exception(
                 'Shape of function does not match number of given names.')
 
-        with tf.variable_scope(variable_scope):
+        with tf.compat.v1.variable_scope(variable_scope):
             self._outputs_dict = {}
             for name, tensor in zip(names,
                                     tf.split(function, len(names), axis=1)):
